@@ -53,4 +53,4 @@
             paths:
                 - public
         only:
-            - master
+            - tags
