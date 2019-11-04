@@ -51,11 +51,10 @@ jacocoTestReport {
 jacocoTestCoverageVerification {
     violationRules {
         rule {
-            element = 'CLASS'
             limit {
                 counter = 'LINE'
                 value = 'COVEREDRATIO'
-                minimum = 0.4
+                minimum = 0.2
             }
             excludes = [
                     'com.nsa.charitystarter.domain.converters.*'
