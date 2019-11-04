@@ -1,70 +1,76 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta charset="UTF-8">
-        <title>Payment</title>
-        <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-              integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" rel="stylesheet">
-        <link href="css/starter-template.css" rel="stylesheet">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <title>Payment</title>
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" rel="stylesheet">
+    <link href="css/starter-template.css" rel="stylesheet">
+</head>
+<body>
 
-    <body>
-        <main class="container mt-4" role="main">
-            <div class="starter-template">
-                <div class="row">
-                    <div class="col-md">
-                        <div id=paymentDetails>
-                            <h3>
-                                You are donating to <span th:text="${charityKey.name}"></span>!
-                            </h3>
-                        </div>
-                    </div>
+<main class="container mt-4" role="main">
+    <div class="starter-template">
+        <div class="row">
+            <div class="col-md">
+                <div id=paymentDetails>
+                    <h3>
+                        You are donating to: &nbsp;
+                        <span th:text="${charity.name}"/>
+                    </h3>
                 </div>
-                <hr>
-                <div class="row">
-                    <div class="col-md">
-                        <h2>Your details are</h2>
-                        <h4>Name:</h4>
-                        <span th:text="${donorKey.firstName}"></span> <span th:text="${donorKey.lastName}"></span>
-                        <h4>Address:</h4>
-                        <span th:text="${donorKey.addressLine1}"></span><br>
-                        <span th:text="${donorKey.addressLine2}"></span><br>
-                        <span th:text="${donorKey.postcode}"></span><br>
-                        <span th:text="${donorKey.country}"></span><br>
-                    </div>
-                </div>
-                <hr>
-                <form action="/payment" method="post" th:object="${paymentKey}">
-                    <div class="form-group">
-                        <label th:for="cardNumber">Please enter your card number</label>
-                        <input aria-describedby="Enter the long number on your credit or debit card"
-                               class="form-control"
-                               placeholder="Card number"
-                               id="cardNumber"
-                               th:field="*{cardNumber}"
-                               type="text"/>
-                        <div class="alert alert-danger" th:errors="*{cardNumber}" th:if="${#fields.hasErrors('cardNumber')}">
-                            Invalid Credit Card Number
-                        </div>
-                    </div>
-
-                    <div class="form-group form-check">
-                        <input aria-describedby="Confirm that card holder address matches the address of the donor"
-                               class="form-check-input"
-                               id="isCardAddressHomeAddress"
-                               name="isCardAddressHomeAddress"
-                               type="checkbox"/>
-                        <label class="form-check-label"
-                               for="isCardAddressHomeAddress">
-                            Card holder address equals donor address?
-                        </label>
-                    </div>
-
-                    <button class="btn btn-primary-outline" id="submit"
-                            type="submit">Proceed to Confirmation
-                    </button>
-                </form>
             </div>
-        </main>
-    </body>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md">
+
+                <h3>Your details are:</h3>
+                <div th:text="${donor.name}"></div>
+                <div th:text="${donor.postcode}"></div>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <form action="/paymentDetails" method="post" th:object="${payment}">
+
+            <div class="form-group">
+                <label th:for="cardNumber">Please enter your card number</label>
+                <input aria-describedby="Enter the long number on your credit or debit card"
+                       class="form-control"
+                       placeholder="cardNumber"
+                       th:field="*{cardNumber}"
+                       type="text"/>
+                <div class="alert alert-danger" th:errors="*{cardNumber}" th:if="${#fields.hasErrors('cardNumber')}">
+                    Invalid Credit Card Number
+                </div>
+            </div>
+
+            <div class="form-group form-check">
+                <input aria-describedby="Confirm that card holder address matches the address of the donor"
+                       class="form-check-input"
+                       id="isCardAddressHomeAddress"
+                       name="isCardAddressHomeAddress"
+                       type="checkbox"/>
+                <label class="form-check-label"
+                       for="isCardAddressHomeAddress">
+                    Card holder address equals donor address?
+                </label>
+            </div>
+
+            <button class="btn btn-primary-outline" id="submit"
+                    type="submit">Proceed to Confirmation
+            </button>
+
+
+        </form>
+
+    </div>
+</main>
+
+
+</body>
 </html>

@@ -3,38 +3,44 @@
 <head>
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
           integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" rel="stylesheet">
-    <link href="css/starter-template.css" rel="stylesheet">
+    <link href="/static/starter-template.css" rel="stylesheet">
 </head>
 
 <body>
 
+<div class="container">
+    <div class="jumbotron">
+        <h1>Charity Giving</h1>
+</div>
+
 <main class="container" role="main">
     <div class="starter-template">
         <div class="row">
-            <P class="lead text-left">Find a UK charity by name
+            <P class="lead text-left"> Please enter the name of the charity that you are looking for.
             </P>
         </div>
         <div class="row">
 
-            <form action="/charities" class="form-inline my-2 my-lg-0" method="get">
+            <form action="/findCharity" class="form-inline my-2 my-lg-0" method="get">
 
                 <input aria-label="Search"
                        class="form-control mr-sm-2"
                        id="search"
                        name="search"
                        type="text"
-                       placeholder="Example: Oxfam"/>
+                       value="Enter charity name"/>
 
                 <input class="btn btn-outline-success my-2 my-sm-0"
                        id="submit"
                        type="submit"
-                       value="Submit"/>
+                       value="submit"/>
 
             </form>
         </div>
     </div>
 </main>
 
+</div>
 </body>
 </html>
 

@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SampleController {
 
     @RequestMapping(value = "/sample", method = RequestMethod.GET)
-    public String sampleResponse() {
+    public String sampleResponse(){
         return "This is a sample response";
     }
 }
-
