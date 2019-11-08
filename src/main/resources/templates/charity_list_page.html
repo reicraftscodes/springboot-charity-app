@@ -9,19 +9,18 @@
 
 <body>
 
-<div id=missingCharityMessage th:if="${#lists.isEmpty(charityKey)}">
-    <h4> No matching charity </h4>
+
+<div id=missingCharityMessage th:if="${#lists.isEmpty(charitiesKey)}">
+    <div>No matching charity</div>
 </div>
-<br>
+
 <main class="container" role="main">
     <div class="starter-template">
         <div class="row">
-
-            <h2>Matches for  &quot;<span th:text="${searchTermKey}"></span>&quot;</h2>
+            <h2>Matches for &quot;<span th:text="${searchTermKey}"></span>&quot;</h2>
         </div>
-
         <div class="row">
-            <div id=charityListContainer th:if="${not #lists.isEmpty(charityKey)}">
+            <div id=charityListContainer th:if="${not #lists.isEmpty(charitiesKey)}">
                 <table class="table">
                     <thead>
                     <tr>
@@ -30,14 +29,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="charity : ${charityKey}">
+                    <tr th:each="currCharity : ${charitiesKey}">
                         <th scope="row">
-                            <a th:href="@{/charity/{id} (id=${charityStat.index+1})}"
-                               th:id="'charityLink'+ ${charityStat.index+1}">
-                                <span th:text="${charity.name}"></span>
+                            <a th:href="@{/charity/{id} (id=${currCharity.id})}"
+                               th:id="'charityLink'+ ${currCharity.id}">
+                                <span th:text="${currCharity.name}"></span>
                             </a>
                         </th>
-                        <td th:text="${charity.registrationNumber}"></td>
+                        <td th:text="${currCharity.registrationNumber}"></td>
                     </tr>
                     </tbody>
                 </table>
@@ -45,7 +44,6 @@
         </div>
     </div>
 </main>
-</div>
 
 
 </body>

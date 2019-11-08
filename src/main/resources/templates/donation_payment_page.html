@@ -16,7 +16,7 @@
                 <div id=paymentDetails>
                     <h3>
                         You are donating to: &nbsp;
-                        <span th:text="${charity.name}"/>
+                        <span th:text="${charityKey.name}"/>
                     </h3>
                 </div>
             </div>
@@ -26,8 +26,8 @@
             <div class="col-md">
 
                 <h3>Your details are:</h3>
-                <div th:text="${donor.name}"></div>
-                <div th:text="${donor.postcode}"></div>
+                <div th:text="${donorKey.name}"></div>
+                <div th:text="${donorKey.postcode}"></div>
 
             </div>
 
@@ -35,7 +35,7 @@
 
         <hr>
 
-        <form action="/paymentDetails" method="post" th:object="${payment}">
+        <form action="/paymentDetails" method="post" th:object="${paymentKey}">
 
             <div class="form-group">
                 <label th:for="cardNumber">Please enter your card number</label>

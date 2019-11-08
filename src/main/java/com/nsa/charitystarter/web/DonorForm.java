@@ -14,7 +14,6 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DonorForm {
-
     @NotNull
     @Size(min = 2, max = 30, message = "Invalid name")
     private String name;
@@ -38,12 +37,16 @@ public class DonorForm {
     private String postcode;
 
     @NotNull
+    private String countryISO;
+
+    private String countryName;
+
+    @NotNull
     @Min(1)
     @NumberFormat(style = NumberFormat.Style.DEFAULT)
     private Double donationAmount;
 
     @NotNull
     private Boolean isGiftAidEligible = Boolean.FALSE;
-
 
 }

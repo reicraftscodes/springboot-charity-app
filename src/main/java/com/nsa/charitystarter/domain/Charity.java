@@ -1,4 +1,4 @@
-package com.nsa.charitystarter.domain.models;
+package com.nsa.charitystarter.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,8 +8,6 @@ import lombok.Data;
 public class Charity {
 
     private Long id;
-
-
     private String name;
     private String registrationNumber;
     private String acronym;

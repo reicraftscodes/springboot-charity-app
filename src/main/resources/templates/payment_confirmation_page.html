@@ -5,8 +5,8 @@
           integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" rel="stylesheet">
     <link href="css/starter-template.css" rel="stylesheet">
 </head>
-<body>
 
+<body>
 <main class="container mt-4" role="main">
     <div class="starter-template">
 
@@ -16,7 +16,7 @@
                 <div id=paymentConfirmation>
 
                     <h3>Thank you</h3>
-                    <div th:text="${donor.name}"></div>
+                    <div th:text="${donorKey.name}"></div>
 
                 </div>
             </div>
@@ -24,21 +24,27 @@
                 <h3>
                     You are about to donate:
                 </h3>
-                <span th:text="'£'+ ${#numbers.formatDecimal(donor.donationAmount,1,2)}"></span>
+                <span th:text="'£'+ ${#numbers.formatDecimal(donorKey.donationAmount,1,2)}"></span>
                 <div>
                     to:
                     <div class="mt-4" id="charityDetails">
-                        <span th:text="${charity.name}"></span>
+                        <span th:text="${charityKey.name}"></span>
                     </div>
+
                     <h3>Using card:</h3>
-                    <div th:text="'**** **** ****'+${last4Card}">
+                    <div th:text="'**** **** ****'+${last4CardKey}">
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <a class="btn btn-primary btn-lg" href="confirm" id="confirm" role="button">Confirm </a>
+
+                <a class="btn btn-primary btn-lg" href="confirm"
+                   id="confirm"
+                   role="button">
+                    Confirm
+                </a>
             </div>
         </div>
 

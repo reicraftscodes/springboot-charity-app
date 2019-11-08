@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sponsor Form</title>
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" rel="stylesheet">
+    <link href="css/starter-template.css" rel="stylesheet">
+</head>
+
+<body>
+
+
+<main role="main" class="container mt-4">
+    <div class="starter-template">
+        <div id="sponsorDetails">
+            <div class="row mt-4">
+                <div class="col-md" style="text-align: center">
+                    <H3 th:text="${sponsorshipKey.fundraiserName}">
+                        Sponsor Title
+                    </H3>
+                </div>
+            </div>
+            <div class="col-md"
+                 style="text-align: right;width: fit-content; margin-inline-start: auto">
+                <div class="row mt-4" style="text-align: right">
+                    <h2>£<span th:text="${donationsTotalsKey.totalDonationsAmount}"></span></h2>
+                </div>
+                <div class="row" style="text-align: right">
+                    +&nbsp;£<span th:text="${donationsTotalsKey.totalGiftAidAmount}"></span>&nbsp;Gift Aid
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-lg">
+                    <h4>Description</h4>
+                    <div th:text="${sponsorshipKey.fundraisingAction}">Description of actions</div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md" style="text-align: left">
+                    <h4>
+                        Last 5 Donations
+                    </h4>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div id=donationListContainer th:if="${not #lists.isEmpty(last5DonationsKey)}">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="currDonation : ${last5DonationsKey}">
+                            <td>
+                                <span th:text="${currDonation.firstName}"></span>&nbsp;
+                                <span th:text="${currDonation.lastName}"></span>
+                            </td>
+                            <td>
+                                £<span
+                                    th:text="${#numbers.formatDecimal(currDonation.amount, 2, 'COMMA', 2, 'POINT')}"></span>
+                            </td>
+
+                            <td th:text="${currDonation.dateOfDonation}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-lg">
+                    <a class="btn btn-primary btn-lg btn-block"
+                       th:href="@{/donateToCharity/{id}/{sponsorId} (id=${sponsorshipKey.charityID}, sponsorId=${sponsorshipKey.id})}"
+                       th:id="@{donateLink{id} (id=${sponsorshipKey.charityID})}">
+                        <span>Donate</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</main>
+
+
+</body>
+</html>
