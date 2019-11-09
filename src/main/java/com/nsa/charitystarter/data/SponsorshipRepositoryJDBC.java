@@ -76,6 +76,7 @@ public class SponsorshipRepositoryJDBC implements SponsorshipRepository {
                 sponsorshipPageCreatedRowMapper));
     }
 
+    // if null handling  "where sf.charity_id = ? group by sf.fundraiser_name order by (sum(IFNULL(d.amount_in_pence,0)) + sum(IFNULL(gad.gift_aid_amount,0))) desc LIMIT 5",
     @Override
     public List<SponsorDonationInfo> getTop5SponsorshipsForACharity(Long charityID) {
         return jdbc.query("select sf.fundraiser_name, sum(d.amount_in_pence) as total_without_gift," +
@@ -87,6 +88,7 @@ public class SponsorshipRepositoryJDBC implements SponsorshipRepository {
                 sponsorDonationStatsRowMapper);
     }
 
+    //if null handling "where sf.charity_id = 1 group by sf.fundraiser_name order by (sum(IFNULL(d.amount_in_pence,0)) + sum(IFNULL(gad.gift_aid_amount,0))) desc LIMIT 5" +
     @Override
     public List<SponsorDonationInfo> getRecentSponsorshipsForACharity(Long charityID) {
         return jdbc.query( "SELECT sf.fundraiser_name, sum(d.amount_in_pence) as total_without_gift," +
