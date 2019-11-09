@@ -3,45 +3,28 @@
 <head>
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
           integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" rel="stylesheet">
-    <link href="/static/starter-template.css" rel="stylesheet">
+    <link href="css/starter-template.css" rel="stylesheet">
 </head>
 
-<body>
-
-<div class="container">
-    <div class="jumbotron">
-        <h1>Charity Giving</h1>
-</div>
-
-<main class="container" role="main">
-    <div class="starter-template">
-        <div class="row">
-            <P class="lead text-left"> Please enter the name of the charity that you are looking for.
-            </P>
-        </div>
-        <div class="row">
-
-            <form action="/findCharity" class="form-inline my-2 my-lg-0" method="get">
-
-                <input aria-label="Search"
-                       class="form-control mr-sm-2"
-                       id="search"
-                       name="search"
-                       type="text"
-                       value="Enter charity name"/>
-
-                <input class="btn btn-outline-success my-2 my-sm-0"
-                       id="submit"
-                       type="submit"
-                       value="submit"/>
-
-            </form>
-        </div>
+<body class="find_charity">
+<section class="search-sec">
+    <div class="container wrapper">
+        <form action="/findCharity" method="get" novalidate="novalidate" class="vertical-center">
+            <div class="row">
+                <h2 style="color: white">Find Charity Foundation in UK</h2>
+                <div class="col-lg-12 mt-4">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 p-0">
+                            <input type="text" class="form-control search-slt" name="search" placeholder="Enter Charity Name">
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <input type="submit" class="btn btn-danger wrn-btn" value="Search"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
-</main>
-
-</div>
+</section>
 </body>
 </html>
-
-
