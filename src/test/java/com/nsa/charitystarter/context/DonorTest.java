@@ -37,26 +37,57 @@ public class DonorTest {
     @MockBean
     private DonationCreator donationCreator;
 
+//
+//    @Test
+//    public void donatingToNSPCCThroughForm() throws Exception {
+//        Charity nspcc = new Charity(
+//                1L,
+//                "National Society for Preventation of Cruelty to Children",
+//                "12345678",
+//                "NSPCC",
+//                "children");
+//
+//        given(this.finder.findCharityByIndex(1)).willReturn(Optional.of(nspcc));
+//
+//        mvc.perform
+//                (
+//                        get
+//                                ("/donateToCharity/1/0")
+//                )
+//                .andDo(
+//                        print()
+//                )
+//                .andExpect(
+//                        status().isOk()
+//                )
+//                .andExpect(
+//                        content().string(
+//                                containsString("National Society for Preventation of Cruelty to Children")
+//                        )
+//                ).andExpect(
+//                content().string(containsString("<form action=\"/donorDetails\" method=\"post\">"))
+//        );
+//    }
 
     @Test
-    public void bhfDonationConfirmation() throws Exception {
+    public void donationConfirmationDisplayedForNSPCC() throws Exception {
         DonorForm donorForm = new DonorForm("aName", "ad1", "ad2", "aCity",
                 "aPostcode", "aCountryISO", "aCountryName", 2.0d,
                 Boolean.FALSE);
 
 
-        Charity bhf = new Charity(
-                4L,
-                "British Heart Foundation",
-                "12334444",
-                "BHF",
-                "heart, cardiac");
+        Charity nspcc = new Charity(
+                1L,
+                "National Society for Preventation of Cruelty to Children",
+                "12345678",
+                "NSPCC",
+                "children");
 
         PaymentForm paymentForm = new PaymentForm();
 
         HashMap<String, Object> sessionAttribute = new HashMap();
         sessionAttribute.put("donorKey", donorForm);
-        sessionAttribute.put("charityKey", bhf);
+        sessionAttribute.put("charityKey", nspcc);
         sessionAttribute.put("sponsorKey", 0);
         sessionAttribute.put("paymentKey", paymentForm);
 
@@ -79,7 +110,7 @@ public class DonorTest {
                 .andExpect(
                         content().string(
                                 containsString(
-                                        "British Heart Foundation"
+                                        "National Society for Preventation of Cruelty to Children"
                                 )
                         )
                 );
