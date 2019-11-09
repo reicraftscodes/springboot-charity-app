@@ -6,7 +6,6 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-
 @Data
 @AllArgsConstructor
 public class DonationMade {
@@ -23,4 +22,3 @@ public class DonationMade {
     private LocalDateTime donationTime;
     private String paymentReference = "payment";
 }
-

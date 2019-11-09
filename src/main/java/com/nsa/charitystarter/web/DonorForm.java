@@ -33,7 +33,7 @@ public class DonorForm {
     // https://www.safaribooksonline.com/library/view/regular-expressions-cookbook/9781449327453/ch04s16.html
     //https://www.regextester.com/97264
     @NotNull
-    @Pattern(regexp = "^([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}|GIR 0AA)$", message = "Invalid postcode")
+//    @Pattern(regexp = "^([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}|GIR 0AA)$", message = "Invalid postcode")
     private String postcode;
 
     @NotNull

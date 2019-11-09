@@ -53,6 +53,7 @@ public class SponsorshipRepositoryJDBC implements SponsorshipRepository {
                 "", new Object[]{name}, sponsorshipPageCreatedRowMapper);
     }
 
+
     @Override
     public Optional<SponsorPageCreated> findByFURL(String furl) {
         try {
@@ -69,14 +70,17 @@ public class SponsorshipRepositoryJDBC implements SponsorshipRepository {
 
     @Override
     public Optional<SponsorPageCreated> findByID(Integer ID) {
-        return Optional.of(jdbc.queryForObject("select id, fundraiser_name, charity_id," +
-                        " fundraising_action, date_created, first_valid_day, last_valid_day, furl" +
-                        " from sponsor_form where id = ?" +
-                        "", new Object[]{ID},
-                sponsorshipPageCreatedRowMapper));
+        try {
+            return Optional.of(jdbc.queryForObject("select id, fundraiser_name, charity_id," +
+                            " fundraising_action, date_created, first_valid_day, last_valid_day, furl" +
+                            " from sponsor_form where id = ?" +
+                            "", new Object[]{ID},
+                    sponsorshipPageCreatedRowMapper));
+        } catch (EmptyResultDataAccessException exception) {
+            return Optional.empty();
+        }
     }
 
-    // if null handling  "where sf.charity_id = ? group by sf.fundraiser_name order by (sum(IFNULL(d.amount_in_pence,0)) + sum(IFNULL(gad.gift_aid_amount,0))) desc LIMIT 5",
     @Override
     public List<SponsorDonationInfo> getTop5SponsorshipsForACharity(Long charityID) {
         return jdbc.query("select sf.fundraiser_name, sum(d.amount_in_pence) as total_without_gift," +
@@ -88,7 +92,6 @@ public class SponsorshipRepositoryJDBC implements SponsorshipRepository {
                 sponsorDonationStatsRowMapper);
     }
 
-    //if null handling "where sf.charity_id = 1 group by sf.fundraiser_name order by (sum(IFNULL(d.amount_in_pence,0)) + sum(IFNULL(gad.gift_aid_amount,0))) desc LIMIT 5" +
     @Override
     public List<SponsorDonationInfo> getRecentSponsorshipsForACharity(Long charityID) {
         return jdbc.query( "SELECT sf.fundraiser_name, sum(d.amount_in_pence) as total_without_gift," +

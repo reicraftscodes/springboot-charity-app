@@ -4,6 +4,8 @@ import com.nsa.charitystarter.domain.Charity;
 import com.nsa.charitystarter.service.charity.CharityFinder;
 import com.nsa.charitystarter.service.donation.DonationCreator;
 import com.nsa.charitystarter.service.events.DonationMade;
+import com.nsa.charitystarter.service.events.SponsorPageCreated;
+import com.nsa.charitystarter.service.sponsorship.SponsorshipFinder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -14,17 +16,20 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Controller
-@SessionAttributes({"charityKey", "donorKey", "paymentKey", "sponsorKey"})
+@SessionAttributes({"charityKey", "donorKey", "paymentKey", "sponsorKey", "sponsor"})
 public class DonorController {
     private CharityFinder finder;
     private DonationCreator donationCreator;
+    private SponsorshipFinder sponsorshipFinder;
 
     //@Autowired
-    public DonorController(CharityFinder aFinder, DonationCreator aCreator) {
+    public DonorController(CharityFinder aFinder, DonationCreator aCreator, SponsorshipFinder aSponsorshipFinder) {
         finder = aFinder;
         donationCreator = aCreator;
+        sponsorshipFinder = aSponsorshipFinder;
     }
 
     static final Logger LOG = LoggerFactory.getLogger(DonorController.class);
@@ -32,12 +37,16 @@ public class DonorController {
 
     @RequestMapping(path = "/donateToCharity/{id}/{sponsorId}", method = RequestMethod.GET)
     public String startDonation(@PathVariable("id") Integer charityId, @PathVariable("sponsorId") Integer sponsorId, Model model) {
-
         Charity charityToBenefit = finder.findCharityByIndex(charityId).get();
+
+        Optional<SponsorPageCreated> sponsorPageCreated = sponsorshipFinder.findSponsorByID(sponsorId);
+        model.addAttribute("sponsor", sponsorPageCreated.orElseGet(SponsorPageCreated::new));
+
         LOG.debug("Putting charity on  model (and therefore on session) with key 'charity'");
         model.addAttribute("charityKey", charityToBenefit);
         model.addAttribute("donorKey", new DonorForm());
         model.addAttribute("sponsorKey", sponsorId);
+
         return "donor_details_page";
 
     }
@@ -46,6 +55,7 @@ public class DonorController {
     public String donorDetails(@SessionAttribute("charityKey") Charity charityToBenefit,
                                @ModelAttribute("donorKey") @Valid DonorForm donor, //from form
                                @ModelAttribute("sponsorKey") Integer sponsorId,
+                               @ModelAttribute("sponsor") SponsorPageCreated sponsor,
                                BindingResult bindingResult,
                                Model model) {
 
@@ -68,6 +78,7 @@ public class DonorController {
     public String paymentDetails(@SessionAttribute("donorKey") DonorForm donor,
                                  @SessionAttribute("charityKey") Charity charityToBenefit,
                                  @ModelAttribute("sponsorKey") Integer sponsorId,
+                                 @SessionAttribute("sponsor") SponsorPageCreated sponsor,
                                  @ModelAttribute("paymentKey") @Valid PaymentForm payment,
                                  BindingResult bindingResult,
                                  Model model) {
@@ -92,6 +103,7 @@ public class DonorController {
     public String confirmDonation(@SessionAttribute("donorKey") DonorForm donor,
                                   @SessionAttribute("charityKey") Charity charityToBenefit,
                                   @ModelAttribute("sponsorKey") Integer sponsorId,
+                                  @ModelAttribute("sponsor") SponsorPageCreated sponsor,
                                   @SessionAttribute("paymentKey") PaymentForm payment,
                                   Model model,
                                   HttpSession session) {

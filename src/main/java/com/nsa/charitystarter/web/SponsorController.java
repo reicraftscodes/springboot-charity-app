@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Optional;
 
-import static java.time.LocalDate.now;
-
 @Controller
 @SessionAttributes({"charityKey", "sponsorKey", "last5DonationsKey", "donationsTotalsKey"})
 public class SponsorController {
