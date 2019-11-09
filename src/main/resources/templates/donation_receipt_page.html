@@ -30,7 +30,9 @@
                 <span th:text="${charityKey.name}"></span>
             </div>
         </div>
-
+        <div class="row mt-4">
+            <a th:href="@{'/sponsorship/' + ${sponsor.furl}}" th:text="@{'Back to ' + ${sponsor.fundraiserName}}"></a>
+        </div>
     </div>
 
     </div>

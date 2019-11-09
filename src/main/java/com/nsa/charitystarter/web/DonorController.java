@@ -6,7 +6,6 @@ import com.nsa.charitystarter.service.donation.DonationCreator;
 import com.nsa.charitystarter.service.events.DonationMade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,8 +21,7 @@ public class DonorController {
     private CharityFinder finder;
     private DonationCreator donationCreator;
 
-    //
-    @Autowired
+    //@Autowired
     public DonorController(CharityFinder aFinder, DonationCreator aCreator) {
         finder = aFinder;
         donationCreator = aCreator;
@@ -76,18 +74,15 @@ public class DonorController {
 
         LOG.debug("From session..." + donor);
         LOG.debug("From session..." + charityToBenefit);
-        LOG.debug(payment.toString()); //
 
         if (bindingResult.hasErrors()) {
             LOG.error(bindingResult.toString());
             LOG.error("Payment Form has binding errors");
-            model.addAttribute("donors", donor); //
             return "donation_payment_page";
         }
 
 
         model.addAttribute("last4CardKey", payment.getCardNumber().substring(payment.getCardNumber().length() - 4));
-        model.addAttribute("donors", donor); //
 
 
         return "payment_confirmation_page";

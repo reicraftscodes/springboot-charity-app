@@ -20,6 +20,9 @@ public class SponsorPageCreated {
     private LocalDateTime lastValidDay;
     private String furl;
 
+    public SponsorPageCreated() {
+    }
+
     public SponsorPageCreated(SponsorForm sponsorForm, String aCharityID) {
         this.id = ID_GENERATOR.getAndIncrement();
         this.fundraiserName = sponsorForm.getFundraiserName();
@@ -31,4 +34,5 @@ public class SponsorPageCreated {
         this.lastValidDay = LocalDateTime.now().plusYears(1L);
 
     }
+
 }
