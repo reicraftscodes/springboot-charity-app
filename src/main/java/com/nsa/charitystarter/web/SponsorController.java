@@ -67,14 +67,14 @@ public class SponsorController {
 
         if (bindingResult.hasErrors()) {
             LOG.error(bindingResult.toString());
-            LOG.error("Sponsor form has binding errors");
+            LOG.error("SponsorPageCreated Form has binding errors");
             return "sponsor_form";
         }
         LOG.debug("Sponsorship = " + sponsor);
 
         Optional<SponsorPageCreated> sponsorship = sponsorFinder.findSponsorByFURL(sponsor.getFurl());
 
-        if (sponsorship.isEmpty()) {
+        if(sponsorship.isEmpty()){
             SponsorPageCreated sponsorshipPageCreated = new SponsorPageCreated(
                     sponsor,
                     String.valueOf((int) (long) charityToBenefit.getId()));

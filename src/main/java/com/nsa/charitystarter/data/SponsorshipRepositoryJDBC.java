@@ -90,18 +90,18 @@ public class SponsorshipRepositoryJDBC implements SponsorshipRepository {
     @Override
     public List<SponsorDonationInfo> getRecentSponsorshipsForACharity(Long charityID) {
         return jdbc.query( "SELECT sf.fundraiser_name, sum(d.amount_in_pence) as total_without_gift," +
-                "sum(gad.gift_aid_amount) as total_gift_aid,sf.furl from sponsor_form sf "+
-                "join donation d on (d.sponsor_form_id = sf.id) "+
-                "left join gift_aid_donation gad on (gad.sponsor_form_id = d.sponsor_form_id) "+
-                "WHERE sf.CHARITY_ID = ? AND FURL NOT IN (" +
+                        "sum(gad.gift_aid_amount) as total_gift_aid,sf.furl from sponsor_form sf "+
+                        "join donation d on (d.sponsor_form_id = sf.id) "+
+                        "left join gift_aid_donation gad on (gad.sponsor_form_id = d.sponsor_form_id) "+
+                        "WHERE sf.CHARITY_ID = ? AND FURL NOT IN (" +
                         "select sf.furl " +
                         "from sponsor_form sf " +
                         "join donation d on (d.sponsor_form_id = sf.id) " +
                         "left join gift_aid_donation gad on (gad.sponsor_form_id = d.sponsor_form_id) " +
                         "where sf.charity_id = 1 group by sf.fundraiser_name order by (sum(IFNULL(d.amount_in_pence,0)) + sum(IFNULL(gad.gift_aid_amount,0))) desc LIMIT 5" +
-                ") " +
-                "group by sf.fundraiser_name " +
-                "ORDER BY DATE_CREATED DESC",
+                        ") " +
+                        "group by sf.fundraiser_name " +
+                        "ORDER BY DATE_CREATED DESC",
                 new Object[]{charityID},
                 sponsorDonationStatsRowMapper);
     }
@@ -130,7 +130,7 @@ public class SponsorshipRepositoryJDBC implements SponsorshipRepository {
                 },
                 holder);
 
-        log.debug("The new sponsorship age furl " + sponsorshipPageCreated.getFurl());
+        log.debug("The new sponsor age furl " + sponsorshipPageCreated.getFurl());
 
 
     }

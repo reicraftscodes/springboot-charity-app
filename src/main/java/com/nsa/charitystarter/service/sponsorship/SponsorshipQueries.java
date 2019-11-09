@@ -2,6 +2,7 @@ package com.nsa.charitystarter.service.sponsorship;
 
 import com.nsa.charitystarter.domain.SponsorDonationInfo;
 import com.nsa.charitystarter.service.events.SponsorPageCreated;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
