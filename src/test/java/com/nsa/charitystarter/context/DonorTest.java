@@ -3,6 +3,8 @@ package com.nsa.charitystarter.context;
 import com.nsa.charitystarter.domain.Charity;
 import com.nsa.charitystarter.service.charity.CharityFinder;
 import com.nsa.charitystarter.service.donation.DonationCreator;
+import com.nsa.charitystarter.service.events.SponsorPageCreated;
+import com.nsa.charitystarter.service.sponsorship.SponsorshipFinder;
 import com.nsa.charitystarter.web.DonorForm;
 import com.nsa.charitystarter.web.PaymentForm;
 import org.junit.Test;
@@ -17,6 +19,7 @@ import java.util.HashMap;
 import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.containsString;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -35,39 +38,43 @@ public class DonorTest {
     private CharityFinder finder;
 
     @MockBean
+    private SponsorshipFinder sponsorshipFinder;
+    @MockBean
     private DonationCreator donationCreator;
 
-//
-//    @Test
-//    public void donatingToNSPCCThroughForm() throws Exception {
-//        Charity nspcc = new Charity(
-//                1L,
-//                "National Society for Preventation of Cruelty to Children",
-//                "12345678",
-//                "NSPCC",
-//                "children");
-//
-//        given(this.finder.findCharityByIndex(1)).willReturn(Optional.of(nspcc));
-//
-//        mvc.perform
-//                (
-//                        get
-//                                ("/donateToCharity/1/0")
-//                )
-//                .andDo(
-//                        print()
-//                )
-//                .andExpect(
-//                        status().isOk()
-//                )
-//                .andExpect(
-//                        content().string(
-//                                containsString("National Society for Preventation of Cruelty to Children")
-//                        )
-//                ).andExpect(
-//                content().string(containsString("<form action=\"/donorDetails\" method=\"post\">"))
-//        );
-//    }
+
+    @Test
+    public void donatingToNSPCCThroughForm() throws Exception {
+        Charity nspcc = new Charity(
+                1L,
+                "National Society for Preventation of Cruelty to Children",
+                "12345678",
+                "NSPCC",
+                "children",
+                "Nspcc1.jpg");
+
+        given(this.finder.findCharityByIndex(1)).willReturn(Optional.of(nspcc));
+        given(this.sponsorshipFinder.findSponsorByID(anyInt())).willReturn(Optional.empty());
+
+        mvc.perform
+                (
+                        get
+                                ("/donateToCharity/1/0")
+                )
+                .andDo(
+                        print()
+                )
+                .andExpect(
+                        status().isOk()
+                )
+                .andExpect(
+                        content().string(
+                                containsString("National Society for Preventation of Cruelty to Children")
+                        )
+                ).andExpect(
+                content().string(containsString("<form action=\"/donorDetails\" method=\"post\">"))
+        );
+    }
 
     @Test
     public void donationConfirmationDisplayedForNSPCC() throws Exception {
@@ -81,7 +88,8 @@ public class DonorTest {
                 "National Society for Preventation of Cruelty to Children",
                 "12345678",
                 "NSPCC",
-                "children");
+                "children",
+                "Nspcc1.jpg");
 
         PaymentForm paymentForm = new PaymentForm();
 
@@ -90,6 +98,7 @@ public class DonorTest {
         sessionAttribute.put("charityKey", nspcc);
         sessionAttribute.put("sponsorKey", 0);
         sessionAttribute.put("paymentKey", paymentForm);
+        sessionAttribute.put("sponsor", new SponsorPageCreated());
 
         mvc.perform
                 (

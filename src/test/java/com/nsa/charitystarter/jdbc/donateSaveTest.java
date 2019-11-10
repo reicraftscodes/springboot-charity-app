@@ -33,10 +33,11 @@ public class donateSaveTest {
                 "British Heart Foundation",
                 "12334444",
                 "BHF",
-                "heart, cardiac");
+                "heart, cardiac",
+                "britishheart6.jpg");
 
-        DonationMade donationMade = new DonationMade(charity, 0, "aName", "aAd1",
-                "aAd2", "aCity", "aPostCode", "245", 1D,
+        DonationMade donationMade = new DonationMade(charity, 0, "aName", "aAdd1",
+                "aAdd2", "aCity", "aPostCode", "245", 1D,
                 Boolean.FALSE, LocalDateTime.now(), "789");
 
         repo.saveDonationEvent(donationMade);

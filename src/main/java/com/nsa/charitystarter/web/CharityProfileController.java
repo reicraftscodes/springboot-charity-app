@@ -27,15 +27,14 @@ public class CharityProfileController {
 
         Optional<Charity> charity = charityFinder.findCharityByIndex(index);
 
-        List<SponsorDonationInfo> top5Sponsorships = sponsorshipFinder.getTop5Sponsorships(charity.get().getId());
-        List<SponsorDonationInfo> recentSponsorships = sponsorshipFinder.getRecentSponsorships(charity.get().getId());
-
         if (charity.isPresent()) {
+
+            List<SponsorDonationInfo> top5Sponsorships = sponsorshipFinder.getTop5Sponsorships(charity.get().getId());
+            List<SponsorDonationInfo> recentSponsorships = sponsorshipFinder.getRecentSponsorships(charity.get().getId());
             model.addAttribute("charityKey", charity.get());
             model.addAttribute("top5SponsorshipsKey", top5Sponsorships);
             model.addAttribute("recentSponsorshipsKey", recentSponsorships);
             return "charity_profile_page";
-
         } else {
             return "404";
         }

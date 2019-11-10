@@ -12,6 +12,8 @@ public class Charity {
     private String registrationNumber;
     private String acronym;
     private String tags;
+    private String logo_file_name;
+
 
     public String searchable() {
         return String.join(";", name, registrationNumber, acronym, tags);

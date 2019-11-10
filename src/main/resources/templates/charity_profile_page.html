@@ -6,88 +6,91 @@
 <main class="container" role="main">
     <div class="card" style="margin-top: 60px; margin-bottom: 100px">
         <div class="card-body">
-            <div id=charityInfo th:if="${charityKey}">
-                <div class="col-md">
-                    <H3 th:text="${charityKey.name}"></H3>
+
+            <div class="row">
+                <div id=charityInfo th:if="${charityKey}">
+                    <div class="col-md">
+                        <H3 th:text="${charityKey.name}"></H3>
+                    </div>
+                </div>
+                <div id=missingCharityMessage th:if="${charityKey ==  null }">
+                    <div>No matching charity</div>
                 </div>
             </div>
 
-            <div id=missingCharityMessage th:if="${charityKey ==  null }">
-                <div>No matching charity</div>
-            </div>
-
             <div class="row mt-4">
-                <div class="col-lg">
+                <div class="col-md-3">
+<!--                    <-- adding img store from db starts here-->
+                    <img th:src="${'/images/' + charityKey.logo_file_name}" class="responsive text-center">
+                    <hr/>
                     <a class="btn btn-primary btn-lg btn-block"
                        th:href="@{/donateToCharity/{id}/0 (id=${charityKey.id})}"
                        th:id="@{donateLink{id} (id=${charityKey.id})}">
                         <span>Donate</span>
                     </a>
-                </div>
-            </div>
 
-            <div class="row mt-4">
-                <div class="col-lg">
                     <a class="btn btn-primary btn-lg btn-block"
                        th:href="@{/charity/{id}/createSponsorForm (id=${charityKey.id})}">
                         <span>Create Sponsor Form</span>
                     </a>
                 </div>
-            </div>
 
-            <div class="row mt-4">
-                <div class="col-md-6" id=recentSponsorshipsListContainer
-                     th:if="${not #lists.isEmpty(top5SponsorshipsKey)}">
-                    <h4 style="text-align: left">
-                        Top 5 Sponsorships
-                    </h4>
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">Fundraiser Name</th>
-                            <th scope="col">Total Raised (inc gift aid)</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="currSponsorship : ${top5SponsorshipsKey}">
-                            <td>
-                                <a th:href="@{/sponsorship/{furl} (furl=${currSponsorship.furl})}"
-                                   th:id="'sponsorshipLink'+ ${currSponsorship.furl}">
-                                    <span th:text="${currSponsorship.titleOfSponsorship}"></span>
-                                </a>
-                            </td>
-                            <td> £<span
-                                    th:text=" ${#numbers.formatDecimal((currSponsorship.totalDonationsAmount + currSponsorship.totalGiftAidAmount)/100, 2, 'COMMA', 2, 'POINT')} "></span>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-md-6" id=sponsorshipsListContainer th:if="${not #lists.isEmpty(recentSponsorshipsKey)}">
-                    <h4 style="text-align: left">
-                        Recent Sponsorship
-                    </h4>
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">Fundraiser Name</th>
-                            <th scope="col">Total Raised (inc gift aid)</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="currSponsorship : ${recentSponsorshipsKey}">
-                            <td>
-                                <a th:href="@{/sponsorship/{furl} (furl=${currSponsorship.furl})}"
-                                   th:id="'sponsorshipLink'+ ${currSponsorship.furl}">
-                                    <span th:text="${currSponsorship.titleOfSponsorship}"></span>
-                                </a>
-                            </td>
-                            <td> £<span
-                                    th:text=" ${#numbers.formatDecimal((currSponsorship.totalDonationsAmount + currSponsorship.totalGiftAidAmount)/100, 2, 'COMMA', 2, 'POINT')} "></span>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                <div class="col-md-9">
+                    <div class="row mt-4">
+                        <div class="col-md-6" id=recentSponsorshipsListContainer
+                             th:if="${not #lists.isEmpty(top5SponsorshipsKey)}">
+                            <h4 style="text-align: left">
+                                Top 5 Sponsorships
+                            </h4>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Fundraiser Name</th>
+                                    <th scope="col">Total Raised (inc gift aid)</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="currSponsorship : ${top5SponsorshipsKey}">
+                                    <td>
+                                        <a th:href="@{/sponsorship/{furl} (furl=${currSponsorship.furl})}"
+                                           th:id="'sponsorshipLink'+ ${currSponsorship.furl}">
+                                            <span th:text="${currSponsorship.titleOfSponsorship}"></span>
+                                        </a>
+                                    </td>
+                                    <td> £<span
+                                            th:text=" ${#numbers.formatDecimal((currSponsorship.totalDonationsAmount + currSponsorship.totalGiftAidAmount)/100, 2, 'COMMA', 2, 'POINT')} "></span>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-6" id=sponsorshipsListContainer th:if="${not #lists.isEmpty(recentSponsorshipsKey)}">
+                            <h4 style="text-align: left">
+                                Recent Sponsorship
+                            </h4>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Fundraiser Name</th>
+                                    <th scope="col">Total Raised (inc gift aid)</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="currSponsorship : ${recentSponsorshipsKey}">
+                                    <td>
+                                        <a th:href="@{/sponsorship/{furl} (furl=${currSponsorship.furl})}"
+                                           th:id="'sponsorshipLink'+ ${currSponsorship.furl}">
+                                            <span th:text="${currSponsorship.titleOfSponsorship}"></span>
+                                        </a>
+                                    </td>
+                                    <td> £<span
+                                            th:text=" ${#numbers.formatDecimal((currSponsorship.totalDonationsAmount + currSponsorship.totalGiftAidAmount)/100, 2, 'COMMA', 2, 'POINT')} "></span>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
