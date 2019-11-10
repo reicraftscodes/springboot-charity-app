@@ -21,7 +21,7 @@ import java.util.Optional;
 public class SponsorshipRepositoryJDBC implements SponsorshipRepository {
     private JdbcTemplate jdbc;
     private RowMapper<SponsorPageCreated> sponsorshipPageCreatedRowMapper;
-    private RowMapper<SponsorDonationInfo> sponsorDonationStatsRowMapper;
+    private RowMapper<SponsorDonationInfo> sponsorDonationsSummaryRowMapper;
 
 
     public SponsorshipRepositoryJDBC(JdbcTemplate aTemplate) {
@@ -37,7 +37,7 @@ public class SponsorshipRepositoryJDBC implements SponsorshipRepository {
                 rs.getString("furl")
         );
 
-        sponsorDonationStatsRowMapper = (rs, i) -> new SponsorDonationInfo(
+        sponsorDonationsSummaryRowMapper = (rs, i) -> new SponsorDonationInfo(
                 rs.getString("fundraiser_name"),
                 rs.getString("furl"),
                 rs.getDouble("total_without_gift"),
@@ -89,7 +89,7 @@ public class SponsorshipRepositoryJDBC implements SponsorshipRepository {
                         "left join gift_aid_donation gad on (gad.sponsor_form_id = d.sponsor_form_id)" +
                         "where sf.charity_id = ? group by sf.fundraiser_name order by (sum(IFNULL(d.amount_in_pence,0)) + sum(IFNULL(gad.gift_aid_amount,0))) desc LIMIT 5",
                 new Object[]{charityID},
-                sponsorDonationStatsRowMapper);
+                sponsorDonationsSummaryRowMapper);
     }
 
     @Override
@@ -108,7 +108,7 @@ public class SponsorshipRepositoryJDBC implements SponsorshipRepository {
                         "group by sf.fundraiser_name " +
                         "ORDER BY DATE_CREATED DESC",
                 new Object[]{charityID},
-                sponsorDonationStatsRowMapper);
+                sponsorDonationsSummaryRowMapper);
     }
 
     @Override

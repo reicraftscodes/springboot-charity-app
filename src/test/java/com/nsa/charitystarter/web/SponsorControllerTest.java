@@ -8,6 +8,7 @@ import com.nsa.charitystarter.service.donation.DonationFinder;
 import com.nsa.charitystarter.service.events.SponsorPageCreated;
 import com.nsa.charitystarter.service.sponsorship.SponsorshipCreator;
 import com.nsa.charitystarter.service.sponsorship.SponsorshipFinder;
+import com.nsa.charitystarter.web.controllers.SponsorController;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

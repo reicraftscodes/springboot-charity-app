@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <div id=missingCharityMessage th:if="${charityKey ==  null }">
-                    <div>No matching charity</div>
+                    <div> No matching charity</div>
                 </div>
             </div>
 
@@ -26,12 +26,12 @@
                     <a class="btn btn-primary btn-lg btn-block"
                        th:href="@{/donateToCharity/{id}/0 (id=${charityKey.id})}"
                        th:id="@{donateLink{id} (id=${charityKey.id})}">
-                        <span>Donate</span>
+                        <span> Donate now </span>
                     </a>
 
                     <a class="btn btn-primary btn-lg btn-block"
                        th:href="@{/charity/{id}/createSponsorForm (id=${charityKey.id})}">
-                        <span>Create Sponsor Form</span>
+                        <span> Sponsor Me</span>
                     </a>
                 </div>
 
@@ -72,7 +72,7 @@
                                 <thead>
                                 <tr>
                                     <th scope="col">Fundraiser Name</th>
-                                    <th scope="col">Total Raised (inc gift aid)</th>
+                                    <th scope="col">Total Raised including gift aid</th>
                                 </tr>
                                 </thead>
                                 <tbody>

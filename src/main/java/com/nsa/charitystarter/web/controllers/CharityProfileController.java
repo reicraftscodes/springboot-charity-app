@@ -1,4 +1,4 @@
-package com.nsa.charitystarter.web;
+package com.nsa.charitystarter.web.controllers;
 
 import com.nsa.charitystarter.domain.Charity;
 import com.nsa.charitystarter.domain.SponsorDonationInfo;

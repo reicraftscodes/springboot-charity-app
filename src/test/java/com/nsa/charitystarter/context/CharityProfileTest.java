@@ -3,6 +3,7 @@ package com.nsa.charitystarter.context;
 import com.nsa.charitystarter.domain.Charity;
 import com.nsa.charitystarter.service.charity.CharityFinder;
 import com.nsa.charitystarter.service.sponsorship.SponsorshipFinder;
+import com.nsa.charitystarter.web.controllers.CharityProfileController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(com.nsa.charitystarter.web.CharityProfileController.class)
+@WebMvcTest(CharityProfileController.class)
 public class CharityProfileTest {
 
     @Autowired

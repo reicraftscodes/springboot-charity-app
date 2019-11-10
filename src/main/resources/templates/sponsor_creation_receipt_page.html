@@ -11,7 +11,8 @@
                     <h3 th:text=" ${sponsorKey.fundraiserName + ' Page created!'}"></h3>
                 </div>
             </div>
-
+            <br>
+            <br>
             <a class="btn btn-violet btn-lg btn-block" th:id="@{sponsorLink{id} (id=${sponsorKey.furl})}"
                th:href="@{/sponsorship/{id} (id=${sponsorKey.furl})}">Go to page</a>
         </div>

@@ -1,4 +1,4 @@
-package com.nsa.charitystarter.web;
+package com.nsa.charitystarter.web.controllers;
 
 import com.nsa.charitystarter.domain.Charity;
 import com.nsa.charitystarter.service.donation.DonationFinder;
@@ -6,6 +6,7 @@ import com.nsa.charitystarter.service.events.SponsorPageCreated;
 import com.nsa.charitystarter.service.charity.CharityFinder;
 import com.nsa.charitystarter.service.sponsorship.SponsorshipCreator;
 import com.nsa.charitystarter.service.sponsorship.SponsorshipFinder;
+import com.nsa.charitystarter.web.SponsorForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
