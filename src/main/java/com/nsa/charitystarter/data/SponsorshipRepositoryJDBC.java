@@ -94,10 +94,10 @@ public class SponsorshipRepositoryJDBC implements SponsorshipRepository {
 
     @Override
     public List<SponsorDonationInfo> getRecentSponsorshipsForACharity(Long charityID) {
-        return jdbc.query( "SELECT sf.fundraiser_name, sum(d.amount_in_pence) as total_without_gift," +
-                        "sum(gad.gift_aid_amount) as total_gift_aid,sf.furl from sponsor_form sf "+
-                        "join donation d on (d.sponsor_form_id = sf.id) "+
-                        "left join gift_aid_donation gad on (gad.sponsor_form_id = d.sponsor_form_id) "+
+        return jdbc.query("SELECT sf.fundraiser_name, sum(d.amount_in_pence) as total_without_gift," +
+                        "sum(gad.gift_aid_amount) as total_gift_aid,sf.furl from sponsor_form sf " +
+                        "join donation d on (d.sponsor_form_id = sf.id) " +
+                        "left join gift_aid_donation gad on (gad.sponsor_form_id = d.sponsor_form_id) " +
                         "WHERE sf.CHARITY_ID = ? AND FURL NOT IN (" +
                         "select sf.furl " +
                         "from sponsor_form sf " +
@@ -129,7 +129,6 @@ public class SponsorshipRepositoryJDBC implements SponsorshipRepository {
                         ps.setDate(5, Date.valueOf(sponsorshipPageCreated.getFirstValidDay().toLocalDate()));
                         ps.setDate(6, Date.valueOf(sponsorshipPageCreated.getLastValidDay().toLocalDate()));
                         ps.setString(7, sponsorshipPageCreated.getFurl());
-
                         return ps;
                     }
                 },

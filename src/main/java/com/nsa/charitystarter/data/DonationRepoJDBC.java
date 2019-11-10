@@ -172,8 +172,6 @@ public class DonationRepoJDBC implements DonationRepository {
                                 connection.prepareStatement("insert into donation(amount_in_pence, donation_date, is_own_money, " +
                                         "has_no_benefit_to_donor, wishes_to_gift_aid, donor_id, sponsor_form_id, charity_id) " +
                                         "values (?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-
-
                         ps.setLong(1, Math.round(donationAmount * 100));
                         ps.setDate(2, Date.valueOf(donationTime.toLocalDate()));
                         ps.setBoolean(3, isGiftAidEligible);

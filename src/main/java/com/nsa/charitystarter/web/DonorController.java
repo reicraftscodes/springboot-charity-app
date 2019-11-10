@@ -126,8 +126,6 @@ public class DonorController {
                     "pay");
 
             donationCreator.makeDonation(donation);
-
-
             session.invalidate();
             return "donation_receipt_page";
         }

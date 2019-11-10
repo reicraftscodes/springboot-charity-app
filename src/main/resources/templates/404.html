@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Error 404</title>
-</head>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/head.html :: head"></head>
 <body>
-
-<h1> Page not found </h1>
-
+<div th:replace="fragments/navbar.html :: nav"></div>
+<section>
+    <br>
+    <br>
+    <h3 style="color: black"> 404 Page not found</h3>
+</section>
+<div th:replace="fragments/footer.html :: div.footer"></div>
 </body>
 </html>
+
+

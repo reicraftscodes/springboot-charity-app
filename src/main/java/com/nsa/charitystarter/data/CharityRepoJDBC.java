@@ -50,7 +50,6 @@ public class CharityRepoJDBC implements CharityRepository {
             return Optional.empty();
         }
     }
-
     @Override
     public List<Charity> findBySearch(String name) {
         String search = "%" + name + "%";
