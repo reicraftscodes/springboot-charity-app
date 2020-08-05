@@ -1,8 +1,5 @@
 # Charity Web App
-This project was an individual assignment we were given in the first semester of 2nd year. The main goal of this assignment was to obuild a system to process charity donations Spring boot, and allow users to donate or create sponsors. 
-
-# Getting Started
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+This project was an individual assignment we were given in the first semester of 2nd year. The main goal of this assignment was to build a system to process charity donations using Spring boot allowing users to donate or create sponsors. 
 
 # Prerequisites
 * Spring Boot - Web Framework used to Build the API.
@@ -10,8 +7,10 @@ These instructions will get you a copy of the project up and running on your loc
 * MySQL - Database System used for persistence
 * Gradle - Dependency Management Tool.
 
-# Running    
-- You must build the project first by clicking 'Build' which can be found on the Gradle panel.
+# Getting Started
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+   
+- You must gradle build the project first which can be found on the Gradle Panel.
 - To run the app, either run a jar file or just simply hit bootRun from Gradle panel.
 
 
