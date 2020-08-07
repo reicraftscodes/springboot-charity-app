@@ -37,4 +37,9 @@ http://localhost:8080/ - main page
 
 ```
 
+## Improvements
+- JPA
+- Input Validation
+- CSS Styling & layout
+- Admin Hub
 
